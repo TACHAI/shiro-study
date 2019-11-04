@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laishishui.shirostudy.mapper.UserMapper">
+    <resultMap id="userMap" type="com.laishishui.shirostudy.model.User">
+        <id property="uid" column="uid"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <collection property="roles" ofType="com.laishishui.shirostudy.model.Role">
+            <id property="rid" column="rid" />
+            <result property="rname" column="rname"/>
+            <collection property="permissions" ofType="com.laishishui.shirostudy.model.Permission">
+                <id property="pid" column="pid"/>
+                <result property="name" column="name"/>
+                <result property="url" column="url"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <select id="findByUsername" parameterType="map" resultMap="userMap">
+
+    </select>
+</mapper>
