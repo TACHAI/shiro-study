@@ -29,8 +29,8 @@ CREATE TABLE role(
   rname varchar (255) not null default '',
   primary key (rid)
 )ENGINE = InnoDB DEFAULT CHARSET = utf8;
-insert into role values(1,'admin')
-insert into role values(2,'customer')
+insert into role values(1,'admin');
+insert into role values(2,'customer');
 
 --  权限角色表 --
 create table permission_role(

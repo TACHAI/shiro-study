@@ -1,5 +1,6 @@
 package com.laishishui.shirostudy.core;
 
+import org.apache.shiro.cache.MemoryConstrainedCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -31,8 +32,12 @@ public class ShiroConfiguration {
         LinkedHashMap<String,String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/index","authc");
         filterChainDefinitionMap.put("/login","anon");
+        filterChainDefinitionMap.put("/loginUser","anon");
+        filterChainDefinitionMap.put("/admin","roles[admin]");
+        filterChainDefinitionMap.put("/edit","perms[edit]");
+        filterChainDefinitionMap.put("/druid/*","anon");
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
-        ;
+
         return bean;
     }
 
@@ -49,6 +54,8 @@ public class ShiroConfiguration {
     @Bean("authRealm")
     public AuthRealm authRealm(@Qualifier("credentialMatcher")CredentialMathcher mathcher){
         AuthRealm authRealm = new AuthRealm();
+        // 设置缓存到内存中
+        authRealm.setCacheManager(new MemoryConstrainedCacheManager());
         authRealm.setCredentialsMatcher(mathcher);
         return authRealm;
     }
