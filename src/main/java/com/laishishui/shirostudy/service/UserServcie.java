@@ -9,5 +9,5 @@ import com.laishishui.shirostudy.model.User;
  */
 public interface UserServcie {
 
-    User findByUsername();
+    User findByUsername(String userName);
 }
